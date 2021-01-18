@@ -1,9 +1,19 @@
 # Sapper Fyrejet Template Benchmarks
 
-Benchmarks run using [WRK](https://github.com/wg/wrk):
-
+### Benchmarks run using [WRK](https://github.com/wg/wrk):
 ```
 wrk -t6 -c64 -d20s http://localhost:3000 
+```
+
+### Server run in Docker on 2015 MBP w the following specs:
+* MacBook Pro (Retina, 15-inch, Mid 2015)
+* Processor: 2.2 GHz Quad-Core Intel Core i7
+* Memory: 16 GB 1600 MHz DDR3
+* Graphics: Intel Iris Pro 1536 MB
+
+### Docker started using the following script:
+```
+docker run -t -i --cpuset-cpus="0-2" -p 3000:3000 ubuntu /bin/bash
 ```
 
 ## Default Template Baseline Performance (Polka)
@@ -204,30 +214,70 @@ Requests/sec:   2127.46
 Transfer/sec:      4.53MB
 ```
 
-
+# CURRENT BEST PERFORMANCE
 ## NanoExpress (compression disabled)
 ### Average across 5 tests:
-Requests/sec: 
-Transfer/sec: MB
+Requests/sec: 3536.13 (34.54% better than 2nd best)
+Transfer/sec: 7.328MB (28.56% better than 2nd best)
 
 * Test 1:
 ```
-
+cryptodeal@Jamess-MBP ~ % wrk -t6 -c64 -d20s http://localhost:3000         
+Running 20s test @ http://localhost:3000
+  6 threads and 64 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    17.41ms    7.74ms  76.02ms   73.46%
+    Req/Sec   583.43    146.19     0.98k    66.08%
+  69750 requests in 20.02s, 144.55MB read
+Requests/sec:   3483.22
+Transfer/sec:      7.22MB
 ```
 * Test 2:
 ```
-
+cryptodeal@Jamess-MBP ~ % wrk -t6 -c64 -d20s http://localhost:3000
+Running 20s test @ http://localhost:3000
+  6 threads and 64 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    17.49ms    7.78ms  72.31ms   73.84%
+    Req/Sec   580.67    149.19     1.02k    64.83%
+  69423 requests in 20.03s, 143.87MB read
+Requests/sec:   3466.21
+Transfer/sec:      7.18MB
 ```
 * Test 3:
 ```
-
+cryptodeal@Jamess-MBP ~ % wrk -t6 -c64 -d20s http://localhost:3000
+Running 20s test @ http://localhost:3000
+  6 threads and 64 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    16.84ms    7.45ms  74.60ms   73.97%
+    Req/Sec   603.11    143.27     1.05k    67.83%
+  72096 requests in 20.03s, 149.41MB read
+Requests/sec:   3600.29
+Transfer/sec:      7.46MB
 ```
 * Test 4:
 ```
-
+cryptodeal@Jamess-MBP ~ % wrk -t6 -c64 -d20s http://localhost:3000
+Running 20s test @ http://localhost:3000
+  6 threads and 64 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    38.47ms  120.25ms   1.03s    96.21%
+    Req/Sec   617.92    157.96     1.05k    67.28%
+  70923 requests in 20.05s, 146.98MB read
+Requests/sec:   3536.83
+Transfer/sec:      7.33MB
 ```
 * Test 5:
 ```
-
+cryptodeal@Jamess-MBP ~ % wrk -t6 -c64 -d20s http://localhost:3000
+Running 20s test @ http://localhost:3000
+  6 threads and 64 connections
+  Thread Stats   Avg      Stdev     Max   +/- Stdev
+    Latency    16.87ms    7.54ms  75.76ms   74.20%
+    Req/Sec   602.05    152.62     1.04k    65.00%
+  71968 requests in 20.02s, 149.14MB read
+Requests/sec:   3594.10
+Transfer/sec:      7.45MB
 ```
 
