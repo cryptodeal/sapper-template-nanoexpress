@@ -1,6 +1,5 @@
-import sirv from 'sirv';
 import nanoexpress from 'nanoexpress';
-//import staticServe from '@nanoexpress/middleware-static-serve';
+import staticServe from '@nanoexpress/middleware-static-serve/cjs/static.cjs'
 //import compression from 'compression';
 import * as sapper from '@sapper/server';
 
@@ -30,14 +29,16 @@ nanoexpress()
       console.log('Connection upgrade');
     });
   })
+  .get('/stresstest', { isRaw: true }, (req, res) => {
+    res.end('hello world');
+  })
   .use(async (req) => {
     req.headers = {};
     req.forEach((key, value) => {
       req.headers[key] = value;
     });
   })
-  //.use(compression({ threshold: 0 }))
-  .use(sirv('static', { dev }))
+  .use(staticServe('static'))
   .use(sapper.middleware())
   .any('/*', () => {})
 

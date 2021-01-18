@@ -10,9 +10,7 @@
   },
   "dependencies": {
     "@nanoexpress/middleware-static-serve": "^1.0.0",
-    "compression": "github:cryptodeal/compression",
     "nanoexpress": "^2.4.7",
-    "polka": "next",
     "sirv": "^1.0.0"
   },
   "devDependencies": {
